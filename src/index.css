@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 25%, #fff8dc 50%, #ffffff 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
