@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Website Chúc mừng Ngày Phụ nữ Việt Nam 20/10
 
 Một website React.js đẹp mắt để chúc mừng Ngày Phụ nữ Việt Nam với animation, âm nhạc và giao diện thân thiện.
@@ -84,3 +85,6 @@ npm run deploy
 ## Tác giả
 
 Made with 💖 by KhangDC
+=======
+# true-love
+>>>>>>> 0d8d84ed5fce2ddacfb527e48138e47eaf75f105
