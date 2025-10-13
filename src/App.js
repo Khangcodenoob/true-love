@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import FlowerAnimation from './components/FlowerAnimation';
 
 function App() {
-  const [audio, setAudio] = useState(null);
+  const audioRef = useRef(null);
+  const replayTimeoutRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [loveMessage, setLoveMessage] = useState('');
@@ -11,41 +12,46 @@ function App() {
 
   // Initialize background music
   useEffect(() => {
-    const backgroundAudio = new Audio('/background-music.mp3');
-    backgroundAudio.loop = false; // Tắt loop tự động
-    backgroundAudio.volume = 0.3;
-    setAudio(backgroundAudio);
+    const src = `${process.env.PUBLIC_URL}/background-music.mp3`;
+    const audio = new Audio(src);
+    audio.loop = false; // do not auto-loop
+    audio.volume = 0.3;
+    audioRef.current = audio;
 
-    // Auto-play music when page loads
-    const playMusic = async () => {
-      try {
-        await backgroundAudio.play();
-        setIsPlaying(true);
-      } catch (error) {
-        console.log('Auto-play was prevented by browser');
-        setIsPlaying(false);
-      }
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleEnded = () => {
+      setIsPlaying(false);
+      // Replay after a short delay
+      replayTimeoutRef.current = window.setTimeout(() => {
+        if (!audioRef.current) return;
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(() => {
+          // keep silent if autoplay blocked
+        });
+      }, 1000);
     };
 
-    // Add event listeners for audio state changes
-    backgroundAudio.addEventListener('play', () => setIsPlaying(true));
-    backgroundAudio.addEventListener('pause', () => setIsPlaying(false));
-    backgroundAudio.addEventListener('ended', () => {
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
+
+    // Try to autoplay (may be blocked by browser)
+    audio.play().catch(() => {
       setIsPlaying(false);
-      // Phát lại từ đầu khi nhạc kết thúc
-      setTimeout(() => {
-        backgroundAudio.currentTime = 0;
-        backgroundAudio.play().catch(error => {
-          console.log('Could not replay audio:', error);
-        });
-      }, 1000); // Chờ 1 giây rồi phát lại
     });
 
-    playMusic();
-
     return () => {
-      if (backgroundAudio) {
-        backgroundAudio.pause();
+      if (replayTimeoutRef.current) {
+        window.clearTimeout(replayTimeoutRef.current);
+      }
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.removeEventListener('play', handlePlay);
+        audioRef.current.removeEventListener('pause', handlePause);
+        audioRef.current.removeEventListener('ended', handleEnded);
+        audioRef.current.src = '';
+        audioRef.current = null;
       }
     };
   }, []);
@@ -146,15 +152,14 @@ function App() {
 
   // Toggle music play/pause
   const toggleMusic = () => {
-    if (audio) {
-      if (audio.paused) {
-        audio.play().catch(error => {
-          console.log('Could not play audio:', error);
-          setIsPlaying(false);
-        });
-      } else {
-        audio.pause();
-      }
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().catch(() => {
+        setIsPlaying(false);
+      });
+    } else {
+      audio.pause();
     }
   };
 
