@@ -286,7 +286,7 @@
 /* Love Message Popup */
 .love-message-popup {
   position: fixed;
-  top: 75%;
+  top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.95);
@@ -621,7 +621,7 @@
   .love-message-popup {
     padding: 15px 20px;
     max-width: 300px;
-    top: 70%;
+    top: 80%;
   }
   
   .love-message-popup p {
@@ -694,7 +694,7 @@
   .love-message-popup {
     padding: 12px 15px;
     max-width: 250px;
-    top: 75%;
+    top: 82%;
   }
   
   .love-message-popup p {
