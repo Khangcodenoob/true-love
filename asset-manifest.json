@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/true-love/static/css/main.a0030e75.css",
+    "main.js": "/true-love/static/js/main.ecf8b4c9.js",
+    "index.html": "/true-love/index.html",
+    "main.a0030e75.css.map": "/true-love/static/css/main.a0030e75.css.map",
+    "main.ecf8b4c9.js.map": "/true-love/static/js/main.ecf8b4c9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a0030e75.css",
+    "static/js/main.ecf8b4c9.js"
+  ]
+}
