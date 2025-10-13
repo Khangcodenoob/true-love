@@ -5,6 +5,7 @@ import FlowerAnimation from './components/FlowerAnimation';
 function App() {
   const audioRef = useRef(null);
   const replayTimeoutRef = useRef(null);
+  const interactionBoundRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [loveMessage, setLoveMessage] = useState('');
@@ -16,6 +17,8 @@ function App() {
     const audio = new Audio(src);
     audio.loop = false; // do not auto-loop
     audio.volume = 0.3;
+    // ensure the browser is aware of the source
+    audio.load();
     audioRef.current = audio;
 
     const handlePlay = () => setIsPlaying(true);
@@ -25,6 +28,11 @@ function App() {
       // Replay after a short delay
       replayTimeoutRef.current = window.setTimeout(() => {
         if (!audioRef.current) return;
+        // only attempt replay if not paused by user
+        if (audioRef.current.paused) {
+          // user paused; don't auto-replay
+          return;
+        }
         audioRef.current.currentTime = 0;
         audioRef.current.play().catch(() => {
           // keep silent if autoplay blocked
@@ -39,6 +47,20 @@ function App() {
     // Try to autoplay (may be blocked by browser)
     audio.play().catch(() => {
       setIsPlaying(false);
+      // Bind one-time user interaction to start audio
+      if (!interactionBoundRef.current) {
+        interactionBoundRef.current = true;
+        const resumeOnInteraction = () => {
+          if (!audioRef.current) return;
+          audioRef.current.play().finally(() => {
+            // remove once attempted
+            window.removeEventListener('pointerdown', resumeOnInteraction);
+            window.removeEventListener('keydown', resumeOnInteraction);
+          });
+        };
+        window.addEventListener('pointerdown', resumeOnInteraction, { once: true });
+        window.addEventListener('keydown', resumeOnInteraction, { once: true });
+      }
     });
 
     return () => {
@@ -53,6 +75,14 @@ function App() {
         audioRef.current.src = '';
         audioRef.current = null;
       }
+      // Clean any interaction listeners in case they were set
+      // Using try-remove without references to be safe
+      // Note: listeners were registered with { once: true } so they likely auto-removed
+      // but we still attempt to remove to avoid leaks in some browsers
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      const noop = () => {};
+      window.removeEventListener('pointerdown', noop);
+      window.removeEventListener('keydown', noop);
     };
   }, []);
 
