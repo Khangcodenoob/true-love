@@ -8,35 +8,30 @@ function App() {
   const interactionBoundRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [loveMessage, setLoveMessage] = useState('');
+  const [loveMessage, setLoveMessage] = useState(''); 
   const [showHearts, setShowHearts] = useState([]);
 
-  // Initialize background music
+  // Initialize background music using an <audio> element in DOM
   useEffect(() => {
-    const src = `${process.env.PUBLIC_URL}/background-music.mp3`;
-    const audio = new Audio(src);
-    audio.loop = false; // do not auto-loop
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.loop = false;
     audio.volume = 0.3;
+    audio.preload = 'auto';
     // ensure the browser is aware of the source
-    audio.load();
-    audioRef.current = audio;
+    try { audio.load(); } catch (_) {}
 
     const handlePlay = () => setIsPlaying(true);
     const handlePause = () => setIsPlaying(false);
     const handleEnded = () => {
       setIsPlaying(false);
-      // Replay after a short delay
+      // Attempt gentle replay after a short delay if user did not pause
       replayTimeoutRef.current = window.setTimeout(() => {
         if (!audioRef.current) return;
-        // only attempt replay if not paused by user
-        if (audioRef.current.paused) {
-          // user paused; don't auto-replay
-          return;
-        }
+        if (audioRef.current.paused) return;
         audioRef.current.currentTime = 0;
-        audioRef.current.play().catch(() => {
-          // keep silent if autoplay blocked
-        });
+        audioRef.current.play().catch(() => {});
       }, 1000);
     };
 
@@ -44,22 +39,32 @@ function App() {
     audio.addEventListener('pause', handlePause);
     audio.addEventListener('ended', handleEnded);
 
-    // Try to autoplay (may be blocked by browser)
-    audio.play().catch(() => {
+    // Try to autoplay (will be blocked in most cases)
+    audio.play().catch((error) => {
+      console.log('Autoplay blocked:', error.message);
       setIsPlaying(false);
-      // Bind one-time user interaction to start audio
       if (!interactionBoundRef.current) {
         interactionBoundRef.current = true;
         const resumeOnInteraction = () => {
-          if (!audioRef.current) return;
-          audioRef.current.play().finally(() => {
-            // remove once attempted
+          const a = audioRef.current;
+          if (!a) return;
+          // iOS unlock: play muted then unmute
+          const originalMuted = a.muted;
+          a.muted = true;
+          a.play().then(() => {
+            a.muted = originalMuted;
+            setIsPlaying(true);
             window.removeEventListener('pointerdown', resumeOnInteraction);
             window.removeEventListener('keydown', resumeOnInteraction);
+            window.removeEventListener('click', resumeOnInteraction);
+          }).catch((err) => {
+            console.log('Play failed:', err.message);
+            setIsPlaying(false);
           });
         };
         window.addEventListener('pointerdown', resumeOnInteraction, { once: true });
         window.addEventListener('keydown', resumeOnInteraction, { once: true });
+        window.addEventListener('click', resumeOnInteraction, { once: true });
       }
     });
 
@@ -67,22 +72,9 @@ function App() {
       if (replayTimeoutRef.current) {
         window.clearTimeout(replayTimeoutRef.current);
       }
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.removeEventListener('play', handlePlay);
-        audioRef.current.removeEventListener('pause', handlePause);
-        audioRef.current.removeEventListener('ended', handleEnded);
-        audioRef.current.src = '';
-        audioRef.current = null;
-      }
-      // Clean any interaction listeners in case they were set
-      // Using try-remove without references to be safe
-      // Note: listeners were registered with { once: true } so they likely auto-removed
-      // but we still attempt to remove to avoid leaks in some browsers
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      const noop = () => {};
-      window.removeEventListener('pointerdown', noop);
-      window.removeEventListener('keydown', noop);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
     };
   }, []);
 
@@ -118,19 +110,19 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // Love messages
-  const loveMessages = [
-    "Em là ánh sáng trong cuộc đời anh 💖",
-    "Mỗi ngày bên em đều là một món quà 🎁",
-    "Anh yêu em hơn cả những gì anh có thể diễn tả 💕",
-    "Em làm trái tim anh hạnh phúc mỗi ngày 🌹",
-    "Cảm ơn em đã là người phụ nữ tuyệt vời nhất 💐",
-    "Anh muốn dành cả đời để yêu thương em 💝",
-    "Em là lý do anh mỉm cười mỗi sáng ☀️",
-    "Tình yêu của anh dành cho em là vô tận ♾️"
+  // Blessing messages for Thao My
+  const blessingMessages = [
+    "Chúc Thảo My luôn xinh đẹp và rạng rỡ 💖",
+    "Mong bạn luôn khỏe mạnh và tràn đầy năng lượng 🌟",
+    "Chúc bạn gặp nhiều may mắn trong cuộc sống 🍀",
+    "Mong bạn luôn hạnh phúc và thành công 💕",
+    "Chúc bạn có những ngày tháng tuyệt vời 🌹",
+    "Mong bạn luôn mỉm cười và lạc quan ☀️",
+    "Chúc bạn đạt được mọi ước mơ 💐",
+    "Mong bạn luôn được yêu thương và trân trọng 💝"
   ];
 
-  // Show random love message
+  // Show random blessing message
   useEffect(() => {
     const showRandomMessage = () => {
       // Check if window height is sufficient to avoid overlapping with footer
@@ -140,7 +132,7 @@ function App() {
       
       // Only show popup if there's enough space
       if (windowHeight > 600) {
-        const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+        const randomMessage = blessingMessages[Math.floor(Math.random() * blessingMessages.length)];
         setLoveMessage(randomMessage);
         
         // Hide message after 5 seconds
@@ -185,11 +177,24 @@ function App() {
     const audio = audioRef.current;
     if (!audio) return;
     if (audio.paused) {
-      audio.play().catch(() => {
-        setIsPlaying(false);
+      audio.play().catch((error) => {
+        console.log('Play failed:', error.message);
+        // iOS/Autoplay unlock fallback: play muted then unmute
+        const originalMuted = audio.muted;
+        audio.muted = true;
+        audio.play()
+          .then(() => {
+            audio.muted = originalMuted;
+            setIsPlaying(true);
+          })
+          .catch((err) => {
+            console.log('Muted play also failed:', err.message);
+            setIsPlaying(false);
+          });
       });
     } else {
       audio.pause();
+      setIsPlaying(false);
     }
   };
 
@@ -206,9 +211,9 @@ function App() {
           <div className="sparkle-3">💫</div>
           
           <h1 className="main-title">
-            Gửi đến em yêu của anh
+            Gửi đến Thảo My
           </h1>
-          <h2 className="date-title">20 tháng 10</h2>
+          <h2 className="date-title">Lời chúc từ trái tim</h2>
           
           {/* Countdown Timer */}
           <div className="countdown-container">
@@ -234,10 +239,10 @@ function App() {
           </div>
           
           <p className="main-message">
-            Em là người phụ nữ tuyệt vời nhất trong cuộc đời anh. 
-            Chúc em luôn xinh đẹp, hạnh phúc và thành công trong mọi việc. 
-            Anh yêu em rất nhiều! 💕
-          </p>
+            Ê nhỏ Thảo My! Tao muốn gửi đến mày những lời chúc tốt đẹp nhất. 
+            Chúc mày luôn xinh đẹp, khỏe mạnh và hạnh phúc trong cuộc sống. 
+            Mong mày luôn thành công và gặp nhiều may mắn! 💕
+            20/10 chỉ biết làm cái này tặng mày thôi, tao bận quá chứ ko cũng rủ mày đi chơi, à mà quên m có người yêu rồi tao rủ làm gì nữa           </p>
           
           {/* Interactive Hearts */}
           {showHearts.map(heart => (
@@ -254,7 +259,7 @@ function App() {
           ))}
         </div>
         
-        {/* Love Message Popup */}
+        {/* Blessing Message Popup */}
         {loveMessage && (
           <div className="love-message-popup">
             <p>{loveMessage}</p>
@@ -262,8 +267,24 @@ function App() {
         )}
       </div>
 
+      {/* Hidden audio element for better compatibility */}
+      <audio
+        ref={audioRef}
+        src={`${process.env.PUBLIC_URL}/background-music.mp3`}
+        preload="auto"
+        playsInline
+        aria-hidden="true"
+        tabIndex={-1}
+        style={{ display: 'none' }}
+      />
+
       {/* Music control button */}
-      <button className="music-toggle" onClick={toggleMusic}>
+      <button
+        className="music-toggle"
+        onClick={toggleMusic}
+        aria-label={isPlaying ? 'Tắt nhạc' : 'Phát nhạc'}
+        title={isPlaying ? 'Tắt nhạc' : 'Phát nhạc (Click để bật nhạc nền)'}
+      >
         {isPlaying ? '🔊' : '🔇'}
       </button>
 

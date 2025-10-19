@@ -1,3 +1,13 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Main App Styles */
 .App {
   min-height: 100vh;
@@ -8,18 +18,18 @@
   justify-content: center;
   padding: 20px;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.4) 0%, transparent 60%),
-    radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.5) 0%, transparent 60%),
-    radial-gradient(circle at 40% 80%, rgba(255, 248, 220, 0.6) 0%, transparent 60%),
-    radial-gradient(circle at 60% 40%, rgba(255, 105, 180, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.6) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.7) 0%, transparent 60%),
+    radial-gradient(circle at 40% 80%, rgba(255, 248, 220, 0.8) 0%, transparent 60%),
+    radial-gradient(circle at 60% 40%, rgba(255, 105, 180, 0.5) 0%, transparent 50%),
     linear-gradient(135deg, #ff9a9e 0%, #fecfef 15%, #ffb6c1 30%, #ffc0cb 45%, #fff8dc 60%, #ffecd2 75%, #fcb69f 90%, #ff9a9e 100%);
   background-attachment: fixed;
   background-size: 400% 400%;
-  animation: backgroundGradient 15s ease infinite;
+  animation: backgroundGradient 20s ease infinite;
   overflow-x: hidden;
 }
 
-/* Animated background elements */
+/* Enhanced background animations */
 .App::before {
   content: '';
   position: fixed;
@@ -28,11 +38,11 @@
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 25% 25%, rgba(255, 105, 180, 0.15) 0%, transparent 30%),
-    radial-gradient(circle at 75% 75%, rgba(255, 182, 193, 0.15) 0%, transparent 30%),
-    radial-gradient(circle at 50% 10%, rgba(255, 248, 220, 0.1) 0%, transparent 25%),
-    radial-gradient(circle at 10% 90%, rgba(255, 192, 203, 0.1) 0%, transparent 25%);
-  animation: backgroundFloat 30s ease-in-out infinite;
+    radial-gradient(circle at 25% 25%, rgba(255, 105, 180, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 75% 75%, rgba(255, 182, 193, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 50% 10%, rgba(255, 248, 220, 0.15) 0%, transparent 25%),
+    radial-gradient(circle at 10% 90%, rgba(255, 192, 203, 0.15) 0%, transparent 25%);
+  animation: backgroundFloat 35s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -45,336 +55,350 @@
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 80% 30%, rgba(255, 107, 157, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 20% 70%, rgba(255, 182, 193, 0.08) 0%, transparent 40%);
-  animation: backgroundFloat 25s ease-in-out infinite reverse;
+    radial-gradient(circle at 80% 30%, rgba(255, 107, 157, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 20% 70%, rgba(255, 182, 193, 0.12) 0%, transparent 40%);
+  animation: backgroundFloat 30s ease-in-out infinite reverse;
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes backgroundFloat {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(1deg);
-  }
+/* Floating particles effect */
+.App::before {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255, 182, 193, 0.4), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 105, 180, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255, 192, 203, 0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: particleFloat 20s linear infinite;
 }
 
 /* Main content container */
 .main-content {
   text-align: center;
   z-index: 10;
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   position: relative;
 }
 
-/* Celebration container */
+/* Enhanced celebration container */
 .celebration-container {
   background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
-  border-radius: 50px;
-  padding: 60px 50px;
-  margin-bottom: 30px;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border-radius: 60px;
+  padding: 80px 60px;
+  margin-bottom: 40px;
   box-shadow: 
-    0 35px 70px rgba(255, 182, 193, 0.5),
-    0 15px 35px rgba(255, 107, 157, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 0 rgba(255, 182, 193, 0.2);
-  backdrop-filter: blur(25px);
-  animation: fadeInUp 1s ease-out, containerFloat 8s ease-in-out infinite;
-  border: 3px solid rgba(255, 255, 255, 0.2);
+    0 40px 80px rgba(255, 182, 193, 0.6),
+    0 20px 40px rgba(255, 107, 157, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -3px 0 rgba(255, 182, 193, 0.3);
+  backdrop-filter: blur(30px);
+  animation: fadeInUp 1.2s ease-out, containerFloat 10s ease-in-out infinite;
+  border: 4px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
 }
 
-/* Glassmorphism effect */
+/* Enhanced glassmorphism effect */
 .celebration-container::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  border-radius: 50px 50px 0 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  border-radius: 60px 60px 0 0;
 }
 
-/* Sparkle effects */
+/* Enhanced sparkle effects */
 .celebration-container::after {
   content: '✨';
   position: absolute;
-  top: 25px;
-  right: 25px;
-  font-size: 1.8rem;
-  animation: sparkle 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+  top: 30px;
+  right: 30px;
+  font-size: 2.2rem;
+  animation: sparkle 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
 }
 
-/* Additional sparkles */
+/* Enhanced additional sparkles */
 .celebration-container .sparkle-1 {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  font-size: 1.2rem;
-  animation: sparkle 5s ease-in-out infinite 1s;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+  top: 35px;
+  left: 35px;
+  font-size: 1.5rem;
+  animation: sparkle 6s ease-in-out infinite 1.5s;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
 }
 
 .celebration-container .sparkle-2 {
   position: absolute;
-  bottom: 30px;
-  right: 30px;
-  font-size: 1.4rem;
-  animation: sparkle 6s ease-in-out infinite 2s;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+  bottom: 35px;
+  right: 35px;
+  font-size: 1.8rem;
+  animation: sparkle 7s ease-in-out infinite 2.5s;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
 }
 
 .celebration-container .sparkle-3 {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  font-size: 1rem;
-  animation: sparkle 4.5s ease-in-out infinite 0.5s;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+  bottom: 35px;
+  left: 35px;
+  font-size: 1.3rem;
+  animation: sparkle 5.5s ease-in-out infinite 0.8s;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
 }
 
-/* Main title */
+/* Enhanced main title */
 .main-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 5.5rem;
-  background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffb6c1, #ffc0cb, #ff6b9d);
-  background-size: 400% 400%;
+  font-size: 6.5rem;
+  background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ffb6c1, #ffc0cb, #ff6b9d, #ff69b4, #ff1493);
+  background-size: 500% 500%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 400;
   text-shadow: 
-    0 0 30px rgba(255, 107, 157, 0.6),
-    0 0 60px rgba(255, 107, 157, 0.3),
-    0 0 90px rgba(255, 107, 157, 0.1);
-  animation: gradientShift 8s ease-in-out infinite, float 6s ease-in-out infinite, titleGlow 4s ease-in-out infinite;
-  letter-spacing: 2px;
+    0 0 40px rgba(255, 107, 157, 0.7),
+    0 0 80px rgba(255, 107, 157, 0.4),
+    0 0 120px rgba(255, 107, 157, 0.2);
+  animation: gradientShift 10s ease-in-out infinite, float 8s ease-in-out infinite, titleGlow 5s ease-in-out infinite;
+  letter-spacing: 3px;
   position: relative;
   line-height: 1.2;
   transform-style: preserve-3d;
-  filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4));
+  filter: drop-shadow(0 0 25px rgba(255, 107, 157, 0.5));
 }
 
+/* Enhanced heart decorations */
 .main-title::before {
   content: '💖';
   position: absolute;
-  left: -70px;
+  left: -80px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2.5rem;
-  animation: heartBeat 3s ease-in-out infinite, heartFloat 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.8));
+  font-size: 3rem;
+  animation: heartBeat 4s ease-in-out infinite, heartFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.9));
 }
 
 .main-title::after {
   content: '💖';
   position: absolute;
-  right: -70px;
+  right: -80px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2.5rem;
-  animation: heartBeat 3s ease-in-out infinite 1s, heartFloat 4s ease-in-out infinite 2s;
-  filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.8));
+  font-size: 3rem;
+  animation: heartBeat 4s ease-in-out infinite 1.5s, heartFloat 5s ease-in-out infinite 2.5s;
+  filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.9));
 }
 
-/* Date title */
+/* Enhanced date title */
 .date-title {
   font-family: 'Dancing Script', cursive;
-  font-size: 3.2rem;
-  background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+  font-size: 3.8rem;
+  background: linear-gradient(45deg, #ff6b9d, #ff8fab, #ff69b4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   font-weight: 600;
-  animation: pulse 4s ease-in-out infinite, gradientShift 6s ease-in-out infinite;
-  text-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
-  letter-spacing: 2px;
+  animation: pulse 5s ease-in-out infinite, gradientShift 8s ease-in-out infinite;
+  text-shadow: 0 0 25px rgba(255, 107, 157, 0.4);
+  letter-spacing: 3px;
 }
 
-/* Main message */
+/* Enhanced main message */
 .main-message {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.6rem;
-  background: linear-gradient(45deg, #6c5ce7, #a29bfe, #fd79a8);
+  font-size: 1.8rem;
+  background: linear-gradient(45deg, #6c5ce7, #a29bfe, #fd79a8, #fdcb6e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  line-height: 1.8;
+  margin-top: 25px;
+  margin-bottom: 35px;
+  line-height: 2;
   font-weight: 500;
-  animation: fadeInUp 2s ease-out 0.8s both;
-  text-shadow: 0 0 15px rgba(108, 92, 231, 0.3);
+  animation: fadeInUp 2.5s ease-out 1s both;
+  text-shadow: 0 0 20px rgba(108, 92, 231, 0.4);
   font-style: italic;
+  padding: 0 20px;
 }
 
-/* Countdown Timer */
+/* Enhanced Countdown Timer */
 .countdown-container {
-  margin: 25px 0;
+  margin: 30px 0;
   text-align: center;
 }
 
 .countdown-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #ff6b9d;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 107, 157, 0.3);
+  text-shadow: 0 0 15px rgba(255, 107, 157, 0.4);
 }
 
 .countdown-timer {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
 }
 
 .countdown-item {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  padding: 15px 20px;
-  min-width: 80px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 20px 25px;
+  min-width: 90px;
   box-shadow: 
-    0 8px 20px rgba(255, 182, 193, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: countdownFloat 3s ease-in-out infinite;
+    0 12px 25px rgba(255, 182, 193, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: countdownFloat 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(255, 182, 193, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5);
 }
 
 .countdown-number {
   display: block;
   font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: #ff6b9d;
-  text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+  text-shadow: 0 0 20px rgba(255, 107, 157, 0.6);
   line-height: 1;
 }
 
 .countdown-label {
   display: block;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #6c5ce7;
   font-weight: 500;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
-/* Interactive Hearts */
+/* Enhanced Interactive Hearts */
 .interactive-heart {
   position: absolute;
-  font-size: 2rem;
+  font-size: 2.5rem;
   pointer-events: none;
-  animation: heartBurst 2s ease-out forwards;
+  animation: heartBurst 2.5s ease-out forwards;
   z-index: 10;
 }
 
-/* Love Message Popup */
+/* Enhanced Love Message Popup */
 .love-message-popup {
   position: fixed;
   top: 85%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 20px 30px;
+  border-radius: 25px;
+  padding: 25px 35px;
   box-shadow: 
-    0 20px 40px rgba(255, 182, 193, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 107, 157, 0.3);
+    0 25px 50px rgba(255, 182, 193, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 107, 157, 0.4);
   z-index: 1000;
-  animation: messagePopup 5s ease-in-out forwards;
-  max-width: 400px;
+  animation: messagePopup 6s ease-in-out forwards;
+  max-width: 450px;
   text-align: center;
 }
 
 .love-message-popup p {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #2d3436;
   margin: 0;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* Music toggle button */
+/* Enhanced Music toggle button */
 .music-toggle {
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: 30px;
+  right: 30px;
   background: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 182, 193, 0.2) 100%);
-  border: 3px solid rgba(255, 255, 255, 0.4);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 182, 193, 0.25) 100%);
+  border: 4px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  font-size: 1.8rem;
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
   cursor: pointer;
   box-shadow: 
-    0 12px 35px rgba(255, 182, 193, 0.5),
-    0 6px 15px rgba(255, 107, 157, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 2px 0 rgba(255, 255, 255, 0.3);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    0 15px 40px rgba(255, 182, 193, 0.6),
+    0 8px 20px rgba(255, 107, 157, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 3px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 1000;
-  backdrop-filter: blur(15px);
-  animation: musicButtonFloat 6s ease-in-out infinite, musicButtonGlow 3s ease-in-out infinite;
+  backdrop-filter: blur(20px);
+  animation: musicButtonFloat 8s ease-in-out infinite, musicButtonGlow 4s ease-in-out infinite;
   transform-style: preserve-3d;
 }
 
 .music-toggle:hover {
-  transform: scale(1.2) rotate(8deg) translateZ(10px);
+  transform: scale(1.25) rotate(10deg) translateZ(15px);
   background: 
-    linear-gradient(135deg, rgba(255, 182, 193, 0.4) 0%, rgba(255, 107, 157, 0.3) 100%);
+    linear-gradient(135deg, rgba(255, 182, 193, 0.5) 0%, rgba(255, 107, 157, 0.4) 100%);
   box-shadow: 
-    0 20px 50px rgba(255, 182, 193, 0.7),
-    0 10px 25px rgba(255, 107, 157, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.3);
+    0 25px 60px rgba(255, 182, 193, 0.8),
+    0 15px 35px rgba(255, 107, 157, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .music-toggle:active {
-  transform: scale(1.05) rotate(-2deg);
+  transform: scale(1.1) rotate(-3deg);
 }
 
-/* Footer */
+/* Enhanced Footer */
 .footer {
   position: fixed;
-  bottom: 25px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   color: #636e72;
-  font-size: 1rem;
+  font-size: 1.1rem;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 15px 25px;
-  border-radius: 25px;
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3);
-  animation: footerFloat 8s ease-in-out infinite;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 18px 30px;
+  border-radius: 30px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 30px rgba(255, 182, 193, 0.4);
+  animation: footerFloat 10s ease-in-out infinite;
   font-weight: 500;
 }
 
-/* Keyframe animations */
+/* Enhanced Keyframe animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(50px) scale(0.9);
+    transform: translateY(60px) scale(0.8);
   }
   to {
     opacity: 1;
@@ -387,7 +411,7 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-15px) rotate(1deg);
+    transform: translateY(-20px) rotate(2deg);
   }
 }
 
@@ -396,7 +420,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
 }
 
@@ -423,24 +447,24 @@
     transform: translateY(-50%) scale(1);
   }
   25% {
-    transform: translateY(-50%) scale(1.2);
+    transform: translateY(-50%) scale(1.3);
   }
   50% {
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.2);
   }
   75% {
-    transform: translateY(-50%) scale(1.3);
+    transform: translateY(-50%) scale(1.4);
   }
 }
 
 @keyframes sparkle {
   0%, 100% {
-    opacity: 0.7;
+    opacity: 0.8;
     transform: scale(1) rotate(0deg);
   }
   50% {
     opacity: 1;
-    transform: scale(1.2) rotate(180deg);
+    transform: scale(1.3) rotate(180deg);
   }
 }
 
@@ -449,7 +473,7 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-8px);
   }
 }
 
@@ -458,7 +482,7 @@
     transform: translateX(-50%) translateY(0px);
   }
   50% {
-    transform: translateX(-50%) translateY(-3px);
+    transform: translateX(-50%) translateY(-5px);
   }
 }
 
@@ -471,27 +495,45 @@
   }
 }
 
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(2deg);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  100% {
+    transform: translateY(-100px) translateX(50px);
+  }
+}
+
 @keyframes containerFloat {
   0%, 100% {
     transform: translateY(0px) rotateX(0deg) rotateY(0deg);
   }
   25% {
-    transform: translateY(-5px) rotateX(1deg) rotateY(-1deg);
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
   }
   50% {
-    transform: translateY(-8px) rotateX(0deg) rotateY(0deg);
+    transform: translateY(-12px) rotateX(0deg) rotateY(0deg);
   }
   75% {
-    transform: translateY(-3px) rotateX(-1deg) rotateY(1deg);
+    transform: translateY(-5px) rotateX(-2deg) rotateY(2deg);
   }
 }
 
 @keyframes titleGlow {
   0%, 100% {
-    filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.4));
+    filter: drop-shadow(0 0 25px rgba(255, 107, 157, 0.5));
   }
   50% {
-    filter: drop-shadow(0 0 40px rgba(255, 107, 157, 0.8));
+    filter: drop-shadow(0 0 50px rgba(255, 107, 157, 0.9));
   }
 }
 
@@ -500,25 +542,25 @@
     transform: translateY(-50%) translateX(0px);
   }
   50% {
-    transform: translateY(-50%) translateX(5px);
+    transform: translateY(-50%) translateX(8px);
   }
 }
 
 @keyframes musicButtonGlow {
   0%, 100% {
     box-shadow: 
-      0 12px 35px rgba(255, 182, 193, 0.5),
-      0 6px 15px rgba(255, 107, 157, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.2),
-      inset 0 2px 0 rgba(255, 255, 255, 0.3);
+      0 15px 40px rgba(255, 182, 193, 0.6),
+      0 8px 20px rgba(255, 107, 157, 0.4),
+      0 0 0 1px rgba(255, 255, 255, 0.3),
+      inset 0 3px 0 rgba(255, 255, 255, 0.4);
   }
   50% {
     box-shadow: 
-      0 12px 35px rgba(255, 182, 193, 0.7),
-      0 6px 15px rgba(255, 107, 157, 0.5),
-      0 0 0 1px rgba(255, 255, 255, 0.3),
-      inset 0 2px 0 rgba(255, 255, 255, 0.4),
-      0 0 30px rgba(255, 107, 157, 0.3);
+      0 15px 40px rgba(255, 182, 193, 0.8),
+      0 8px 20px rgba(255, 107, 157, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.4),
+      inset 0 3px 0 rgba(255, 255, 255, 0.5),
+      0 0 40px rgba(255, 107, 157, 0.4);
   }
 }
 
@@ -527,7 +569,7 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
   }
 }
 
@@ -537,11 +579,11 @@
     opacity: 1;
   }
   50% {
-    transform: scale(1.5) rotate(180deg);
-    opacity: 0.8;
+    transform: scale(1.8) rotate(180deg);
+    opacity: 0.9;
   }
   100% {
-    transform: scale(2) rotate(360deg);
+    transform: scale(2.5) rotate(360deg);
     opacity: 0;
   }
 }
@@ -549,35 +591,108 @@
 @keyframes messagePopup {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translate(-50%, -50%) scale(0.7);
   }
-  10% {
+  15% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
+    transform: translate(-50%, -50%) scale(1.1);
   }
-  20% {
+  25% {
     transform: translate(-50%, -50%) scale(1);
   }
-  80% {
+  75% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translate(-50%, -50%) scale(0.7);
   }
 }
 
-/* Responsive design */
+/* Enhanced Responsive design */
 @media (max-width: 768px) {
   .App {
     padding: 15px;
   }
   
   .celebration-container {
+    padding: 50px 35px;
+    margin-bottom: 30px;
+    border-radius: 40px;
+  }
+  
+  .main-title {
+    font-size: 4.5rem;
+    letter-spacing: 2px;
+  }
+  
+  .main-title::before,
+  .main-title::after {
+    font-size: 2rem;
+    left: -50px;
+    right: -50px;
+  }
+  
+  .date-title {
+    font-size: 3rem;
+  }
+  
+  .main-message {
+    font-size: 1.5rem;
+    line-height: 1.8;
+  }
+  
+  .countdown-timer {
+    gap: 20px;
+  }
+  
+  .countdown-item {
+    padding: 15px 20px;
+    min-width: 80px;
+  }
+  
+  .countdown-number {
+    font-size: 2rem;
+  }
+  
+  .countdown-title {
+    font-size: 1.3rem;
+  }
+  
+  .love-message-popup {
+    padding: 20px 25px;
+    max-width: 350px;
+    top: 80%;
+  }
+  
+  .love-message-popup p {
+    font-size: 1.1rem;
+  }
+  
+  .music-toggle {
+    width: 65px;
+    height: 65px;
+    font-size: 1.6rem;
+    top: 25px;
+    right: 25px;
+  }
+  
+  .footer {
+    font-size: 1rem;
+    padding: 15px 25px;
+    bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .celebration-container {
     padding: 35px 25px;
-    margin-bottom: 25px;
-    border-radius: 30px;
+    border-radius: 35px;
   }
   
   .main-title {
@@ -588,8 +703,8 @@
   .main-title::before,
   .main-title::after {
     font-size: 1.5rem;
-    left: -40px;
-    right: -40px;
+    left: -35px;
+    right: -35px;
   }
   
   .date-title {
@@ -598,7 +713,7 @@
   
   .main-message {
     font-size: 1.3rem;
-    line-height: 1.6;
+    line-height: 1.7;
   }
   
   .countdown-timer {
@@ -611,17 +726,17 @@
   }
   
   .countdown-number {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   
   .countdown-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   
   .love-message-popup {
     padding: 15px 20px;
     max-width: 300px;
-    top: 80%;
+    top: 82%;
   }
   
   .love-message-popup p {
@@ -629,86 +744,13 @@
   }
   
   .music-toggle {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     font-size: 1.4rem;
-    top: 20px;
-    right: 20px;
   }
   
   .footer {
     font-size: 0.9rem;
     padding: 12px 20px;
-    bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .App {
-    padding: 10px;
-  }
-  
-  .celebration-container {
-    padding: 25px 20px;
-    border-radius: 25px;
-  }
-  
-  .main-title {
-    font-size: 2.8rem;
-    letter-spacing: 0.5px;
-  }
-  
-  .main-title::before,
-  .main-title::after {
-    font-size: 1.2rem;
-    left: -30px;
-    right: -30px;
-  }
-  
-  .date-title {
-    font-size: 2rem;
-  }
-  
-  .main-message {
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
-  
-  .countdown-timer {
-    gap: 10px;
-  }
-  
-  .countdown-item {
-    padding: 10px 12px;
-    min-width: 60px;
-  }
-  
-  .countdown-number {
-    font-size: 1.3rem;
-  }
-  
-  .countdown-title {
-    font-size: 1rem;
-  }
-  
-  .love-message-popup {
-    padding: 12px 15px;
-    max-width: 250px;
-    top: 82%;
-  }
-  
-  .love-message-popup p {
-    font-size: 0.9rem;
-  }
-  
-  .music-toggle {
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-  }
-  
-  .footer {
-    font-size: 0.8rem;
-    padding: 10px 15px;
   }
 }
