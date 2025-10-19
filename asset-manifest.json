@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/true-love/static/css/main.a0030e75.css",
-    "main.js": "/true-love/static/js/main.97d7bcde.js",
+    "main.css": "/true-love/static/css/main.b7adf2eb.css",
+    "main.js": "/true-love/static/js/main.f6f61537.js",
     "index.html": "/true-love/index.html",
-    "main.a0030e75.css.map": "/true-love/static/css/main.a0030e75.css.map",
-    "main.97d7bcde.js.map": "/true-love/static/js/main.97d7bcde.js.map"
+    "main.b7adf2eb.css.map": "/true-love/static/css/main.b7adf2eb.css.map",
+    "main.f6f61537.js.map": "/true-love/static/js/main.f6f61537.js.map"
   },
   "entrypoints": [
-    "static/css/main.a0030e75.css",
-    "static/js/main.97d7bcde.js"
+    "static/css/main.b7adf2eb.css",
+    "static/js/main.f6f61537.js"
   ]
 }
